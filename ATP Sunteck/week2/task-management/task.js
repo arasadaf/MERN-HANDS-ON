@@ -1,40 +1,47 @@
-// task.js
-import { validateTitle, validatePriority, validateDueDate } from './validator.js';
+import { validateDueDate, validatePriority, validateTitle } from "./validator.js";
 
 const tasks = [];
-let id = 1;
+let idCounter = 1;
 
-// Add new task
-function addTask(title, priority, dueDate) {
-  if (!validateTitle(title)) return 'Invalid title';
-  if (!validatePriority(priority)) return 'Invalid priority';
-  if (!validateDueDate(dueDate)) return 'Invalid due date';
+//Add new task
+//Validate using imported functions
+// If valid, add to tasks array
+// Return success/error message
+export function addTask(title, priority, dueDate) {
+  let titleCheck = validateTitle(title);
+  if (titleCheck !== true) return titleCheck;
 
-  let task = {
-    id: id++,
-    title,
-    priority,
-    dueDate,
+  let priorityCheck = validatePriority(priority);
+  if (priorityCheck !== true) return priorityCheck;
+
+  let dateCheck = validateDueDate(dueDate);
+  if (dateCheck !== true) return dateCheck;
+
+  const task = {
+    id: idCounter++,
+    title: title,
+    priority: priority,
+    dueDate: dueDate,
     completed: false
   };
 
   tasks.push(task);
-  return 'Task added successfully';
+  return "Task added successfully";
 }
 
-// Get all tasks
-function getAllTasks() {
+//Get all tasks
+export function getAllTasks() {
   return tasks;
 }
 
-// Mark task as complete
-function completeTask(taskId) {
-  let task = tasks.find(t => t.id === taskId);
+//Mark task as complete
+export function completeTask(taskId) {
+  const task = tasks.find(t => t.id === taskId);
 
-  if (!task) return 'Task not found';
+  if (!task) {
+    return "Task not found";
+  }
 
   task.completed = true;
-  return 'Task completed';
+  return "Task completed";
 }
-
-export { addTask, getAllTasks, completeTask };
