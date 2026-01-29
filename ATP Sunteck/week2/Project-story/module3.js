@@ -1,71 +1,37 @@
-// Merge cart with courses (get full course details)
-let k = [];
+/*MODULE 3: SHOPPING CART ENGINE 
+  -> Merge cart with courses to get full course info
+  -> Calculate total cart amount
+  -> Increase quantity of a course (immutably)
+  -> Remove a course from cart
+  -> Check if all cart items are paid courses*/
+import {users, courses, cart, roles} from './engine.js'
 
-for (let i = 0; i < cart.length; i++) {
-  let item = cart[i];
-
+//Merge cart with courses to get full course info
+let a = cart.map(item => {
   let course = courses.find(c => c.id === item.courseId);
 
-  k.push({
-    id: course.id,
+  return {
+    courseId: item.courseId,
     title: course.title,
     price: course.price,
     qty: item.qty
-  });
-}
-
-console.log("k =", k);
-
-
-// Calculate total cart amount
-let l = 0;
-
-for (let i = 0; i < k.length; i++) {
-  l = l + (k[i].price * k[i].qty);
-}
-
-console.log("l =", l);
+  };
+});
+console.log("Cart Details:", a);
 
 
-// Increase quantity immutably (courseId = 101)
-let m = [];
+//Calculate total cart amount
+let b=courses.map(ele=>[ele.title,ele.price])
+console.log("b=",b)
 
-for (let i = 0; i < cart.length; i++) {
-  let item = cart[i];
+//Increase quantity of a course (immutably)
+let c = a.reduce((sum, item) => sum + item.price * item.qty,0);
+console.log("Total Amount:", c);
 
-  if (item.courseId === 101) {
-    m.push({
-      courseId: item.courseId,
-      qty: item.qty + 1
-    });
-  } else {
-    m.push(item);
-  }
-}
+//Remove a course from cart
+let d = cart.filter(item => item.courseId !== 103);
+console.log("After Remove:", d);
 
-console.log("m =", m);
-
-
-// Remove a course from cart (courseId = 103)
-let n = [];
-
-for (let i = 0; i < cart.length; i++) {
-  if (cart[i].courseId !== 103) {
-    n.push(cart[i]);
-  }
-}
-
-console.log("n =", n);
-
-
-// Check if all cart items are paid courses (price > 0)
-let o = true;
-
-for (let i = 0; i < k.length; i++) {
-  if (k[i].price <= 0) {
-    o = false;
-    break;
-  }
-}
-
-console.log("o =", o);
+//Check if all cart items are paid courses
+let e = a.every(item => item.price > 0);
+console.log("All Paid Courses:", e);
