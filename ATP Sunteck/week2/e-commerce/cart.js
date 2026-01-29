@@ -1,63 +1,63 @@
-// cart.js
-import { getProductById, checkStock } from './product.js';
+import { getProduct, checkStock } from './product.js';
 
 let cartItems = [];
 
-function addToCart(productId, quantity) {
-  let product = getProductById(productId);
-  if (!product) return 'Product not found';
+// Add product to cart
+export function addToCart(productId, quantity) {
+  // 1. Get product details
+  let product = getProduct(productId);
+  if (!product) return "Product not found";
 
-  if (!checkStock(productId, quantity)) return 'Insufficient stock';
+  // 2. Check stock availability
+  if (!checkStock(productId, quantity))
+    return "stock unavailable";
 
+  // 3. Check if product already in cart
   let item = cartItems.find(i => i.productId === productId);
 
   if (item) {
+    // If yes, update quantity
     item.quantity += quantity;
   } else {
-    cartItems.push({ productId, quantity });
+    // If no, add new item
+    cartItems.push({productId,name: product.name,price: product.price,quantity});
   }
 
-  return 'Added to cart';
+  // 4. Return success message
+  return "Item added to cart";
 }
 
-function removeFromCart(productId) {
+// Remove product from cart
+export function removeFromCart(productId) {
   cartItems = cartItems.filter(i => i.productId !== productId);
-  return 'Item removed';
+  return "Item removed from cart";
 }
 
-function updateQuantity(productId, newQuantity) {
-  if (!checkStock(productId, newQuantity)) return 'Stock not available';
+// Update quantity of product in cart
+export function updateQuantity(productId, newQuantity) {
+  if (!checkStock(productId, newQuantity))
+    return "Stock not available";
 
   let item = cartItems.find(i => i.productId === productId);
-  if (!item) return 'Item not found';
+  if (!item) return "Item not found";
 
   item.quantity = newQuantity;
-  return 'Quantity updated';
+  return "Quantity updated";
 }
 
-function getCartItems() {
-  return cartItems.map(i => {
-    let product = getProductById(i.productId);
-    return { ...product, quantity: i.quantity };
-  });
+// Return all cart items
+export function getCartItems() {
+  return cartItems;
 }
 
-function getCartTotal() {
-  return getCartItems().reduce(
-    (sum, i) => sum + i.price * i.quantity,
-    0
-  );
+// Calculate total price of cart
+export function getCartTotal() {
+  let total = 0;
+  cartItems.forEach(item => {total += item.price * item.quantity;});
+  return total;
 }
 
-function clearCart() {
+// Empty the cart
+export function clearCart() {
   cartItems = [];
 }
-
-export {
-  addToCart,
-  removeFromCart,
-  updateQuantity,
-  getCartItems,
-  getCartTotal,
-  clearCart
-};
