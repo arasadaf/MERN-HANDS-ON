@@ -1,0 +1,66 @@
+GET http://127.0.0.1:3000/user-api/users
+
+###
+
+POST http://127.0.0.1:3000/user-api/users
+Content-Type: application/json
+
+{
+    "id":100,
+    "name":"ram",
+    "age":19
+}
+
+###
+
+PUT http://127.0.0.1:3000/user-api/users
+Content-Type: application/json
+
+{
+    "id":100,
+    "name":"ram",
+    "age":21
+}
+
+###
+
+GET http://127.0.0.1:3000/user-api/users/100
+
+###
+
+DELETE http://127.0.0.1:3000/user-api/users/100
+
+
+###
+GET  http://127.0.0.1:3000/product-api/products
+
+###
+GET  http://127.0.0.1:3000/product-api/products-id/200
+
+###
+GET  http://127.0.0.1:3000/product-api/products-brand/Apple
+
+###
+POST http://127.0.0.1:3000/product-api/products
+Content-Type: application/json
+
+{
+    "pid":200,
+    "name":"mobile",
+    "price":40000,
+    "brand":"Sams"
+}
+
+###
+PUT http://127.0.0.1:3000/product-api/products
+Content-Type: application/json
+
+{
+    "pid":100,
+    "name":"mobile",
+    "price":15000,
+    "brand":"Apple"
+}
+
+###
+DELETE http://127.0.0.1:3000/product-api/products/300
