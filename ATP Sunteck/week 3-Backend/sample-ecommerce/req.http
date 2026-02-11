@@ -1,0 +1,46 @@
+
+GET http://127.0.0.1:4000/product-api/products
+
+###create product req
+POST http://localhost:4000/product-api/products
+Content-Type: application/json
+
+{
+    "productName":"jar",
+    "price":3000,
+    "brand":"philips"
+    
+}
+
+
+
+
+###
+
+GET http://127.0.0.1:4000/user-api/users
+
+###corr
+POST http://localhost:4000/user-api/users
+Content-Type: application/json
+
+{
+    "Name":"arhaan",
+    "password":"aea",
+    "email":"arru@gmail.com",
+    "cart":[]
+}
+
+
+###req to add product to cart
+PUT http://localhost:4000/user-api/user-cart/user-id/69818f8d67db2e10908ee81e/product-id/698194575b38df0fe6549025
+
+
+###Read user by id
+GET http://127.0.0.1:4000/user-api/users/69818f8d67db2e10908ee81e
+
+
+
+
+
+
+
