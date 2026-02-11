@@ -1,0 +1,120 @@
+### User Register
+POST http://localhost:4000/user-api/users
+Content-Type: application/json
+
+{
+    "firstName":"Anurag",
+    "lastName":"User",
+    "email":"anurag.user@example.com",
+    "password":"User@1234",
+    "profileImageUrl":"https://example.com/avatars/user.png"
+}
+
+### User Login
+POST http://localhost:4000/common-api/login
+Content-Type: application/json
+
+{
+    "email":"anurag.user@example.com",
+    "password":"User@1234",
+    "role":"USER"
+}
+
+### Read article(USER)
+GET http://localhost:4000/user-api/articles
+
+
+### Update article(USER)
+PUT http://localhost:4000/user-api/articles
+Content-Type: application/json
+
+{
+    "articleId":"6989aa62c087f2bc502c85c3",
+    "comment":"like it"
+}
+
+
+### Author Register
+POST http://localhost:4000/author-api/users
+Content-Type: application/json
+
+{
+    "firstName":"Anurag",
+    "lastName":"Author",
+    "email":"anurag.author@example.com",
+    "password":"Author@1234",
+    "profileImageUrl":"https://example.com/avatars/author.png"
+}
+
+### Author Login
+POST http://localhost:4000/common-api/login
+Content-Type: application/json
+
+{
+    "email":"anurag.author@example.com",
+    "password":"Author@1234",
+    "role":"AUTHOR"
+}
+
+
+### Create article(AUTHOR)
+POST http://localhost:4000/author-api/articles
+Content-Type: application/json
+
+{
+    "author":"6989fe084c5880cba75aaf6b",
+    "title":"test1 article",
+    "category":"programmming",
+    "content":"content of test1 article"
+}
+
+### Read article(AUTHOR)
+GET http://localhost:4000/author-api/articles/6989fe084c5880cba75aaf6b
+
+
+
+### Update article(AUTHOR)
+PUT http://localhost:4000/author-api/articles
+Content-Type: application/json
+
+{
+    "author":"6989fe084c5880cba75aaf6b",
+    "articleId":"6989fe324c5880cba75aaf6f",
+    "title":"test2 article updated",
+    "category":"programmming",
+    "content":"content of test2 article updated"
+}
+
+### Delete article(AUTHOR)
+DELETE  http://localhost:4000/author-api/articles
+Content-Type: application/json
+
+{
+    "author":"6989fe084c5880cba75aaf6b",
+    "articleId":"6989fe324c5880cba75aaf6f",
+    "isArticleActive":false
+}
+
+
+
+### Logout
+GET http://localhost:4000/common-api/logout
+
+###
+GET http://localhost:4000/test
+
+###
+PUT  http://localhost:4000/admin-api/block/6989fddf4c5880cba75aaf66
+
+###
+PUT  http://localhost:4000/admin-api/unblock/6989fddf4c5880cba75aaf66
+
+###
+PUT http://localhost:4000/common-api/change-password
+Content-Type: application/json
+
+{
+    "email":"admin@gmail.com",
+    "currentPassword":"User@1234",
+    "newPassword":"admin"
+}
